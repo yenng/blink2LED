@@ -2,16 +2,19 @@
 :source:
   :path: test
   :file: test_State.c
-:successes: []
+:successes:
+- :test: test_RELEASED_to_PRESSED_ON
+  :line: 12
+  :message: ''
+- :test: test_PRESSED_ON_to_PRESSED_OFF
+  :line: 19
+  :message: ''
 :failures: []
-:ignores:
-- :test: test_module_generator_needs_to_be_implemented
-  :line: 14
-  :message: Implement me!
+:ignores: []
 :counts:
-  :total: 1
-  :passed: 0
+  :total: 2
+  :passed: 2
   :failed: 0
-  :ignored: 1
+  :ignored: 0
 :stdout:
 - ''

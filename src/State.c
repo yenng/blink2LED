@@ -1,7 +1,7 @@
 #include "State.h"
 
 int getButton(int button){
-	return 0;
+	return 1;
 }
 
 void turnLED(int LED, int on_off){
@@ -9,7 +9,7 @@ void turnLED(int LED, int on_off){
 }
 
 int getTime(){
-	return 10;
+	return 250;
 }
 
 void buttonAndLED(TaskState *ts){
