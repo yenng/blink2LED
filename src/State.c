@@ -1,15 +1,9 @@
 #include "State.h"
-
-int getButton(int button){
-	return 1;
-}
+#include "Timer.h"
+#include "Button.h"
 
 void turnLED(int LED, int on_off){
 	
-}
-
-int getTime(){
-	return 250;
 }
 
 void buttonAndLED(TaskState *ts){

@@ -4,16 +4,49 @@
   :file: test_State.c
 :successes:
 - :test: test_RELEASED_to_PRESSED_ON
-  :line: 12
+  :line: 32
   :message: ''
 - :test: test_PRESSED_ON_to_PRESSED_OFF
-  :line: 19
+  :line: 44
+  :message: ''
+- :test: test_PRESSED_OFF_to_PRESSED_ON
+  :line: 59
+  :message: ''
+- :test: test_PRESSED_OFF_to_RELEASE_OFF
+  :line: 70
+  :message: ''
+- :test: test_PRESSED_OFF_to_PRESSED_ON_to_PRESSED_OFF
+  :line: 82
+  :message: ''
+- :test: test_PRESSED_ON_to_RELEASE_ON
+  :line: 94
+  :message: ''
+- :test: test_RELEASED_ON_to_RELEASE_OFF
+  :line: 106
+  :message: ''
+- :test: test_RELEASED_OFF_to_RELEASE_ON
+  :line: 117
+  :message: ''
+- :test: test_RELEASED_OFF_to_RELEASE_ON_to_RELEASED_OFF
+  :line: 128
+  :message: ''
+- :test: test_RELEASED_OFF_to_TURNING_OFF
+  :line: 140
+  :message: ''
+- :test: test_RELEASED_ON_to_TURNING_OFF
+  :line: 151
+  :message: ''
+- :test: test_TURNING_OFF_to_TURNING_OFF
+  :line: 162
+  :message: ''
+- :test: test_TURNING_OFF_to_RELEASE
+  :line: 173
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 2
-  :passed: 2
+  :total: 13
+  :passed: 13
   :failed: 0
   :ignored: 0
 :stdout:

@@ -6,6 +6,7 @@
   Unity.CurrentTestName = #TestFunc; \
   Unity.CurrentTestLineNumber = TestLineNum; \
   Unity.NumberOfTests++; \
+  CMock_Init(); \
   if (TEST_PROTECT()) \
   { \
       setUp(); \
@@ -14,14 +15,19 @@
   if (TEST_PROTECT() && !TEST_IS_IGNORED) \
   { \
     tearDown(); \
+    CMock_Verify(); \
   } \
+  CMock_Destroy(); \
   UnityConcludeTest(); \
 }
 
 //=======Automagically Detected Files To Include=====
 #include "unity.h"
+#include "cmock.h"
 #include <setjmp.h>
 #include <stdio.h>
+#include "mock_Timer.h"
+#include "mock_Button.h"
 
 int GlobalExpectCount;
 int GlobalVerifyOrder;
@@ -32,13 +38,47 @@ extern void setUp(void);
 extern void tearDown(void);
 extern void test_RELEASED_to_PRESSED_ON(void);
 extern void test_PRESSED_ON_to_PRESSED_OFF(void);
+extern void test_PRESSED_OFF_to_PRESSED_ON(void);
+extern void test_PRESSED_OFF_to_RELEASE_OFF(void);
+extern void test_PRESSED_OFF_to_PRESSED_ON_to_PRESSED_OFF(void);
+extern void test_PRESSED_ON_to_RELEASE_ON(void);
+extern void test_RELEASED_ON_to_RELEASE_OFF(void);
+extern void test_RELEASED_OFF_to_RELEASE_ON(void);
+extern void test_RELEASED_OFF_to_RELEASE_ON_to_RELEASED_OFF(void);
+extern void test_RELEASED_OFF_to_TURNING_OFF(void);
+extern void test_RELEASED_ON_to_TURNING_OFF(void);
+extern void test_TURNING_OFF_to_TURNING_OFF(void);
+extern void test_TURNING_OFF_to_RELEASE(void);
 
+
+//=======Mock Management=====
+static void CMock_Init(void)
+{
+  GlobalExpectCount = 0;
+  GlobalVerifyOrder = 0;
+  GlobalOrderError = NULL;
+  mock_Timer_Init();
+  mock_Button_Init();
+}
+static void CMock_Verify(void)
+{
+  mock_Timer_Verify();
+  mock_Button_Verify();
+}
+static void CMock_Destroy(void)
+{
+  mock_Timer_Destroy();
+  mock_Button_Destroy();
+}
 
 //=======Test Reset Option=====
 void resetTest(void);
 void resetTest(void)
 {
+  CMock_Verify();
+  CMock_Destroy();
   tearDown();
+  CMock_Init();
   setUp();
 }
 
@@ -47,8 +87,20 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_State.c");
-  RUN_TEST(test_RELEASED_to_PRESSED_ON, 12);
-  RUN_TEST(test_PRESSED_ON_to_PRESSED_OFF, 19);
+  RUN_TEST(test_RELEASED_to_PRESSED_ON, 32);
+  RUN_TEST(test_PRESSED_ON_to_PRESSED_OFF, 44);
+  RUN_TEST(test_PRESSED_OFF_to_PRESSED_ON, 59);
+  RUN_TEST(test_PRESSED_OFF_to_RELEASE_OFF, 70);
+  RUN_TEST(test_PRESSED_OFF_to_PRESSED_ON_to_PRESSED_OFF, 82);
+  RUN_TEST(test_PRESSED_ON_to_RELEASE_ON, 94);
+  RUN_TEST(test_RELEASED_ON_to_RELEASE_OFF, 106);
+  RUN_TEST(test_RELEASED_OFF_to_RELEASE_ON, 117);
+  RUN_TEST(test_RELEASED_OFF_to_RELEASE_ON_to_RELEASED_OFF, 128);
+  RUN_TEST(test_RELEASED_OFF_to_TURNING_OFF, 140);
+  RUN_TEST(test_RELEASED_ON_to_TURNING_OFF, 151);
+  RUN_TEST(test_TURNING_OFF_to_TURNING_OFF, 162);
+  RUN_TEST(test_TURNING_OFF_to_RELEASE, 173);
 
+  CMock_Guts_MemFreeFinal();
   return (UnityEnd());
 }
