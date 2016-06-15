@@ -45,7 +45,7 @@ void resetTest(void)
 //=======MAIN=====
 int main(void)
 {
-  UnityBegin("test_blinking2LED.c");
+  UnityBegin("test_State.c");
   RUN_TEST(test_module_generator_needs_to_be_implemented, 12);
 
   return (UnityEnd());

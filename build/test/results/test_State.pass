@@ -1,7 +1,7 @@
 ---
 :source:
   :path: test
-  :file: test_blinking2LED.c
+  :file: test_State.c
 :successes: []
 :failures: []
 :ignores:
