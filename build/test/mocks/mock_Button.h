@@ -26,5 +26,11 @@ void getButton_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, int cmock_to_ret
 void getButton_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, int Button, int cmock_to_return);
 typedef int (* CMOCK_getButton_CALLBACK)(int Button, int cmock_num_calls);
 void getButton_StubWithCallback(CMOCK_getButton_CALLBACK Callback);
+#define isButtonPressed_IgnoreAndReturn(cmock_retval) isButtonPressed_CMockIgnoreAndReturn(__LINE__, cmock_retval)
+void isButtonPressed_CMockIgnoreAndReturn(UNITY_LINE_TYPE cmock_line, int cmock_to_return);
+#define isButtonPressed_ExpectAndReturn(cmock_retval) isButtonPressed_CMockExpectAndReturn(__LINE__, cmock_retval)
+void isButtonPressed_CMockExpectAndReturn(UNITY_LINE_TYPE cmock_line, int cmock_to_return);
+typedef int (* CMOCK_isButtonPressed_CALLBACK)(int cmock_num_calls);
+void isButtonPressed_StubWithCallback(CMOCK_isButtonPressed_CALLBACK Callback);
 
 #endif
